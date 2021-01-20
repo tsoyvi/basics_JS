@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict';
+
+        // Поэкспериментировал с рекурсией
+        /**
+         * Функция запроса у пользователя положительного числа
+         * @param {string} текст перед вопросом (по умолчанию пусто)
+         * @returns {number} Вернет число введенное пользователем
+         */
+        function getContribution(text = "") {
+
+            let contribution = +prompt(text + "Введите желаемую сумму вклада?");
+
+            if (isNaN(contribution) || contribution < 0 || contribution == "") {
+                contribution = getContribution('Поддерживаются только положительные цифры. Повторите попытку \n');
+            }
+
+            return contribution;
+        }
+
+
+        /**
+         * Функция склонения слова "рубль" в зависимости от окончания числа
+         * @param {number} number число относительно которого будем склонять 
+         * @returns {string} Вернет строку "Рубль" в падеже в зависимости от окончания числа
+         */
+        function setDeclension(number) {
+            let str = "" + number; // переводим число в строку
+            let str_len = str.length - 1; // находим длину строки, и отнимаем 1 т.к. массив  в строках нумеруется с нуля
+            let lastNumber = +str[str_len]; // берем последний символ в строке и переводим его в число
+
+            switch (true) {
+                case lastNumber == 1: return "рубль"
+                case lastNumber > 1 && lastNumber < 5: return "рубля"
+                case lastNumber > 4 || lastNumber == 0: return "рублей"
+            }
+        }
+
+
+        let contribution = getContribution(); // Запрашиваем число у пользователя
+        console.log(`Ваша сумма в ${contribution} ${setDeclension(contribution)} успешно зачислена.`);
+
+
+    </script>
+
+</body>
+
+</html>

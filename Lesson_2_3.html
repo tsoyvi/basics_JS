@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict';
+
+        let a = 5;
+        let b = -25;
+
+        if (a >= 0 && b >= 0) {
+            alert(`Оба числа положительные, a - b = ${a - b}`);
+        }
+
+        if (a< 0 && b <0) {
+            alert(`Оба числа отрицательные, a * b = ${a * b}`);
+        }
+
+
+        // можно было сделать что бы выводилась какая переменная именно положительная или отрицательная 
+        // но в задании это не оговорено поэтому обойдемся одним условием и выводом
+        if ( (a >= 0 && b < 0) || (a < 0 && b >= 0) ) {
+            alert(`Переменные разных знаков, a + b = ${a + b}`);
+        }
+
+
+
+        
+    </script>
+
+</body>
+
+</html>

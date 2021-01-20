@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict';
+
+        // ЗАДАНИЕ № 4
+
+        /**
+         * Функция сложения двух чисел
+         * @param {number} a первое число 
+         * @param {number} b второе число
+         * @returns {number} Вернет число полученную сумму при сложении двух чисел 
+         */
+        function plus(a, b) {
+            return a + b;
+        }
+
+
+        /**
+         * Функция вычитания двух чисел
+         * @param {number} a первое число (Уменьшаемое)
+         * @param {number} b второе число (Вычитаемое)
+         * @returns {number} Вернет разность двух чисел
+         */
+        function minus(a, b) {
+            return a - b;
+        }
+
+
+        /**
+         * Функция умножения двух чисел
+         * @param {number} a первое число (Множимое)
+         * @param {number} b второе число (Множитель)
+         * @returns {number} Вернет результат умножения (Произведение)
+         */
+        function times(a, b) {
+            return a * b;
+        }
+
+        /**
+         * Функция деления двух чисел
+         * @param {number} a первое число (Делимое)
+         * @param {number} b второе число (Делитель)
+         * @returns {number} Вернет результат деления (Частное)
+         */
+        function division(a, b) {
+            return a / b;
+        }
+
+        console.log(`Складываем 5 и 6  = ${plus(5, 6)}`);
+        console.log(`Вычитаем 3 из 10  = ${minus(10, 3)}`);
+        console.log(`Умножаем 10 и 5  = ${times(10, 5)}`);
+        console.log(`Делим 255 на 5  = ${division(255, 5)}`);
+
+        //****************************************************************
+
+        // ЗАДАНИЕ №5 
+
+        function mathOperation(arg1, arg2, operation) {
+            switch (operation) {
+
+                case "+": return plus(arg1, arg2);
+                    break;
+
+                case "-": return minus(arg1, arg2);
+                    break;
+
+                case "*": return times(arg1, arg2);
+                    break;
+
+                case "/": return division(arg1, arg2);
+                    break;
+
+                default: return "error operation";
+            }
+        }
+
+
+        console.log(`Складываем 5 и 6  = ${mathOperation(5, 6, "+")}`);
+        console.log(`Вычитаем 3 из 10  = ${mathOperation(10, 3, "-")}`);
+        console.log(`Умножаем 10 и 5  = ${mathOperation(10, 5, "*")}`);
+        console.log(`Делим 255 на 5  = ${mathOperation(255, 5, "/")}`);
+        
+        console.log(`Делим 255 на 55  = ${mathOperation(255, 5, "++")}`);
+
+        //****************************************************************
+
+    </script>
+
+</body>
+
+</html>
