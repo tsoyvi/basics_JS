@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson-3</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict'
+
+        // Задание № 1
+        /*
+        С помощью цикла for написать алгоритм для вывода чисел от 0 до 10 включительно, чтобы результат выглядел так:
+        0 – это ноль
+        1 – нечетное число
+        2 – четное число
+        3 – нечетное число
+        10 – четное число
+        */
+
+        for (let i = 0; i <= 10; i++) {
+
+            if (i == 0) {
+                console.log(`${i} - это ноль`);
+                continue;
+            }
+
+            if ((i % 2) == 0) {
+                console.log(`${i} - четное число`);
+            } else {
+                console.log(`${i} - нечетное число`);
+            }
+        }
+
+        //**********************************************
+
+
+        // Задание № 2
+
+        console.log("");
+        console.log("Задание № 2");
+        // Выведите в консоль значения, указанные рядом с комментариями:
+
+        const post = {
+            author: "John", //вывести этот текст
+            postId: 23,
+            comments: [
+                {
+                    userId: 10,
+                    userName: "Alex",
+                    text: "lorem ipsum",
+                    rating: {
+                        likes: 10,
+                        dislikes: 2 //вывести это число
+                    }
+                },
+                {
+                    userId: 5, //вывести это число
+                    userName: "Jane",
+                    text: "lorem ipsum 2", //вывести этот текст
+                    rating: {
+                        likes: 3,
+                        dislikes: 1
+                    }
+                },
+            ]
+        };
+
+
+        //  воспользуюсь универсальным способом для объектов и массивов
+
+        console.log(post["author"]); // John
+        console.log(post["comments"][0]["rating"]["dislikes"]); // 2
+        console.log(post["comments"][1]["userId"]); // 5
+        console.log(post["comments"][1]["text"]); // lorem ipsum 2
+
+
+        // второй вариант
+
+        console.log("");
+        console.log("второй вариант");
+
+        console.log(post.author); // John
+        console.log(post.comments[0].rating.dislikes); // 2
+        console.log(post.comments[1].userId); // 5
+        console.log(post.comments[1].text); // lorem ipsum 2
+
+
+        //**********************************************
+
+
+
+        // Задание № 3
+
+        console.log("");
+        console.log("Задание № 3");
+        //Перед вами находится массив с продуктами, сегодня распродажа и вам нужно на каждый товар применить скидку
+        //15%, можете использовать метод forEach
+
+        const products = [
+            {
+                id: 3,
+                price: 200,
+            },
+            {
+                id: 4,
+                price: 900,
+            },
+            {
+                id: 1,
+                price: 1000,
+            },
+        ];
+
+        products.forEach(function (obj) {
+            console.log(`Старая цена: ${obj.price} / Новая цена: ${obj.price - obj.price * 0.15}`); // считаем 15% скидку и выводим значения
+
+        });
+
+        //**********************************************
+
+
+        // Задание № 4
+
+        console.log("");
+        console.log("Задание № 4");
+        /*  4 Перед вами находится массив с продуктами в интернет - магазине.Вам нужно:
+          1 Получить все товары, у которых есть фотографии, можете использовать метод filter https://mzl.la/2qROQkT
+          2 Отсортируйте товары по цене(от низкой цены к высокой), можете использовать метод sort
+          https://mzl.la/2Y79hbZ , как устроен sort можно посмотреть например здесь https://youtu.be/O2pusOp0gC0*/
+
+        const products1 = [
+            {
+                id: 3,
+                price: 127,
+                photos: [
+                    "1.jpg",
+                    "2.jpg",
+                ]
+            },
+            {
+                id: 5,
+                price: 499,
+                photos: []
+            },
+            {
+                id: 10,
+                price: 26,
+                photos: [
+                    "3.jpg"
+                ]
+            },
+            {
+                id: 8,
+                price: 78,
+            },
+        ];
+
+
+        // создаем массив результат фильтрации по наличию картинок 
+        let products1NewArr = products1.filter(function (obj) {
+
+            if ("photos" in obj) { // Проверяем есть ли "photos" в нашем объекте
+                return obj.photos.length != 0 // если есть то проверяем не пустой ли массив "photos", если нет то возвращается true, и наш фильтр добавит этот товар
+            }
+
+        })
+
+        // сортировка по цене
+        // результат работы sort создает ссылку на массив, мы обойдемся без нее и просто  продолжим использовать наш уже отсортированный массив
+        products1NewArr.sort(function (obj1, obj2) {
+            return obj1.price - obj2.price;
+        })
+
+        console.log(products1NewArr);
+
+        //**********************************************
+
+
+        // Задание № 5
+
+        console.log("");
+        console.log("Задание № 5");
+
+
+        /*  5 (По желанию, т.к. такая особенность практически не используется) Вывести с помощью цикла for числа от 0 до 9,
+          НЕ используя тело цикла. То есть выглядеть должно примерно так:
+          for(…){/* здесь пусто }
+          Помните, что в первом, втором и третьем раздела цикла можно не только писать условия, или увеличивать счетчик
+          например на 1, допустимы любые выражения, например вызовы функций.*/
+
+
+        function forInc(i) {
+            console.log(i);
+            return ++i
+        }
+
+        for (let i = 0; i <= 9; i = forInc(i)) {
+            /* здесь пусто */
+        }
+
+        //**********************************************
+
+
+        // Задание № 6
+
+        console.log("");
+        console.log("Задание № 6");
+
+        /*6 Нарисовать горку с помощью console.log (используя цикл for), как показано на рисунке,
+        только у вашей горки должно быть 20 рядов, а не 5:
+        x
+        xx
+        xxx
+        xxxx
+        xxxxx
+        */
+
+        let str = "";
+        for (let i = 0; i < 20; i++) {
+            str += "х";
+            console.log(str);
+        }
+
+        //**********************************************
+
+
+    </script>
+
+
+
+</body>
+
+</html>
