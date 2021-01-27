@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict';
+
+        /*
+        (это задание делайте по желанию) Написать функцию, преобразующую число в объект. Передавая на
+        вход число в диапазоне [0, 999],
+        мы должны получить на выходе объект, в котором в соответствующих свойствах описаны разряды числа:
+        - единицы (в свойстве units)
+        - десятки (в свойстве tens)
+        - сотни (в свойстве hundereds)
+        Например, для числа 45 мы должны получить следующий объект:
+        units: 5, //это единицы
+        tens: 4, //это десятки
+        hundreds: 0, //это сотни
+        Если число было передано вне [0, 999] диапазона, не целое число или вообще не число,
+        необходимо выдать соответствующее сообщение с помощью console.log и вернуть пустой объект.
+        */
+
+        /**
+         * Функция возвращает объект с разбитым на разряды числом
+         * @param {number} number число которое надо разбить
+         * @returns {object} object возвращает объект
+         * 
+         */
+        function setObj(number) {
+            let obj = {
+                units: 0,
+                tens: 0,
+                hundreds: 0,
+            };
+
+            let i = 0;
+            while (number) {
+                switch (i) {
+                    case 0:
+                        obj.units = number % 10;
+                        break;
+                    case 1:
+                        obj.tens = number % 10;
+                        break;
+                    case 2:
+                        obj.hundreds = number % 10;
+                        break;
+                }
+                number = Math.floor(number / 10);
+                i++;
+            }
+
+            return obj;
+        }
+
+
+        let number = +prompt("Введите число в диапазоне от 0 до 999");
+
+        if (isNaN(number)) {
+            console.log("Вы ввели не число.");
+        } else if (number < 0 || number > 999) {
+            console.log("Вы ввели число вне диапазона.");
+        } else if (!Number.isInteger(number)) {
+            console.log("Вы ввели не целое число.");
+        } else {
+            console.log("выполняем функцию");
+            console.log(setObj(number));
+        }
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

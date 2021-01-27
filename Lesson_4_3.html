@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict';
+
+        const questions = [
+            {
+                question: "Сколько букв в слове \"привет\":",
+                varAnswer: ["a. Пять.", "b. Шесть.", "c. Семь.", "d. Куда я попал?"],
+                rightAnswer: "b",
+
+            },
+
+            {
+                question: "2 х 2 = :",
+                varAnswer: ["a. 9.", "b. 8.", "c. 9.", "d. 4."],
+                rightAnswer: "d",
+            },
+
+            {
+                question: "снег цветом?:",
+                varAnswer: ["a. Зеленый.", "b. Желтый.", "c. Белый.", "d. Черный."],
+                rightAnswer: "c",
+            },
+
+            {
+                question: "Зимой и летом одним цветом?:",
+                varAnswer: ["a. Дерево.", "b. Дом.", "c. ёлка.", "d. трава."],
+                rightAnswer: "c",
+            },
+
+            {
+                question: "7 х 5 = ?:",
+                varAnswer: ["a. 35.", "b. 65.", "c. 40.", "d. 30."],
+                rightAnswer: "a",
+            },
+        ]
+
+
+        let game = {
+            index: 0, // счетчик текущего вопроса
+            count: 0, // счетчик правильных ответов
+
+            /**
+             * Запуск игры 
+             */
+            run() {
+
+                let userAns = "";
+                while (this.index < questions.length) {
+                    userAns = this.askQuestion();
+                    if (userAns == "x") break;
+
+                    this.checkingResponse(userAns);
+                    this.index++;
+                }
+
+                if (userAns == "x") {
+                    this.exitGame();
+                } else {
+                    this.endGame();
+                }
+
+            },
+
+            /**
+             * Инициализация игры (сброс переменных)
+             */
+            init() {
+                this.index = 0;
+                this.count = 0;
+            },
+
+            /**
+             * Функция задает вопрос возвращает ответ пользователя
+             */
+            askQuestion() {
+                let str = this.questionSet();
+                str += this.varAnswerSet();
+                return prompt(str);
+            },
+
+            /**
+            * Функция генерирует список вариантов ответов
+            */
+            varAnswerSet() {
+                let str = "\n";
+                questions[this.index].varAnswer.forEach(function (varAnswer) {
+                    str += `       ${varAnswer} \n`;
+                })
+                return str;
+            },
+
+            /**
+             * Функция генерирует вопрос
+             */
+            questionSet() {
+                return `Для выхода введите "x" \n\n Вопрос № ${this.index + 1} \n    ${questions[this.index].question}`;
+            },
+
+            /**
+            * Функция проверяет правильный ли ответ если да то прибавляет счетчик правильных ответов
+            */
+            checkingResponse(userAnswer) {
+                if (userAnswer == questions[this.index].rightAnswer) {
+                    this.count++;
+                }
+
+            },
+
+            /**
+             * Функция конец игры
+             */
+            endGame() {
+                if (confirm(`Правильных ответов ${this.count} \n Хотите сыграть еще раз`)) {
+                    this.init();
+                    this.run();
+                }
+            },
+
+            /**
+             * Функция выход из игры по желанию пользователя
+             */
+            exitGame() {
+                alert(`Выход из игры \n Правильных ответов ${this.count} `);
+            }
+
+        }
+
+
+
+
+        if (confirm("Здравствуйте! Это игра кто хочет быть миллионером. Хотите сыграть")) {
+            game.init();
+            game.run();
+        }
+
+
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
