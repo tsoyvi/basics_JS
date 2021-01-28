@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        'use strict';
+
+
+        // Задание 1.1
+        /* Сделайте в стиле es5, а затем в стиле es6 (по аналогии из дополнительных видео -> 3 примеры
+            наследования -> типы на es5 и es6), конструктор Product, который принимает параметры name и price, сохраните
+            их как свойства объекта. Также объекты типа Product должны иметь метод make25PercentDiscount, который будет
+            уменьшать цену в объекте на 25%. Имейте в виду, что метод make25PercentDiscount не должен быть внутри
+            функции-конструктора, и также не нужно создавать отдельный объект-прототип (как объект transport в уроке).*/
+        console.log("Задание 1.1");
+
+        function Product(name, price) {
+            this.name = name;
+            this.price = price;
+        }
+
+        Product.prototype.make25PercentDiscount = function () {
+            this.price = this.price - this.price * 0.25;
+        }
+
+        Product.prototype.show = function () {
+            console.log(`Название: ${this.name}, стоимость: ${this.price}`);
+        }
+
+        let obj1 = new Product("apple", 100);
+        obj1.make25PercentDiscount();
+        obj1.show();
+
+
+        // тоже самое в стиле ES6
+        class ProductEs6 {
+            constructor(name, price) {
+                this.name = name;
+                this.price = price;
+            }
+
+            make25PercentDiscount() {
+                this.price = this.price - this.price * 0.25;
+            }
+
+            show() {
+                console.log(`Название: ${this.name}, стоимость: ${this.price}`);
+            }
+        }
+
+        let objEs6 = new ProductEs6("apple", 100);
+        objEs6.make25PercentDiscount();
+        objEs6.show();
+
+
+
+
+        // Задание 1.2
+        /* Сделайте в стиле es5, а затем в стиле es6 (по аналогии из дополнительных видео -> 3 примеры
+         наследования -> механика наследования),
+         а) конструктор Post, который принимает параметры author, text, date и сохраняет их как свойства объекта. Объекты
+         типа Post должны иметь метод edit, который будет принимать текст и записывать его в свойство text объекта.
+         б) конструктор AttachedPost, который принимает параметры author, text, date. Проинициализируйте эти свойства с
+         помощью конструктора Post, чтобы не дублировать код. Также в конструкторе AttachedPost должно создаваться
+         свойство highlighted со значением false. Унаследуйте в объектах типа AttachedPost методы из Post.
+         Объекты типа AttachedPost должны иметь метод makeTextHighlighted, который будет назначать свойству
+         highlighted значение true.*/
+        console.log("");
+        console.log("Задание 1.2");
+
+        function Post(author, text, date) {
+            this.author = author;
+            this.text = text;
+            this.date = date;
+        }
+
+        Post.prototype.edit = function (text) {
+            this.text = text;
+        }
+
+        Post.prototype.show = function () {
+            console.log(`автор: ${this.author}, текст: ${this.text}, дата: ${this.date}`);
+        }
+
+
+        // функция конструктор для AttachedPost
+        function AttachedPost(author, text, date, highlighted = false) {
+            Post.call(this, author, text, date); // наследуем свойства у Post
+            this.highlighted = highlighted; // и добавляем свои
+        }
+
+        AttachedPost.prototype = Object.create(Post.prototype); // наследуем методы у Post
+        AttachedPost.prototype.constructor = AttachedPost;
+
+        AttachedPost.prototype.makeTextHighlighted = function () { // и добавляем новый метод
+            console.log(`Меняем highlighted c ${this.highlighted}`);
+            this.highlighted = true;
+            console.log(`на ${this.highlighted}`);
+        }
+
+
+        // Проверка вывод в консоль
+        let objPost = new Post("Пушкин", "У лукоморья дуб зелёный.", "1820");
+        objPost.edit("У лукоморья дуб срубили");
+        objPost.show();
+
+
+        let objAttachedPost = new AttachedPost("Лермонтов", "Ночевала тучка золотая.", "1841");
+        objAttachedPost.edit("На груди утеса-великана");
+        objAttachedPost.show();
+        objAttachedPost.makeTextHighlighted();
+
+
+
+        // тоже самое в стиле ES6
+
+        class PostEs6 {
+            constructor(author, text, date) {
+                this.author = author;
+                this.text = text;
+                this.date = date;
+            }
+
+            edit(text) {
+                this.text = text;
+            }
+
+            show() {
+                console.log(`автор: ${this.author}, текст: ${this.text}, дата: ${this.date}`);
+            }
+
+        }
+
+        class AttachedPostEs6 extends PostEs6 {
+
+            // highlighted = false;
+            constructor(author, text, date, highlighted = false) {
+                super(author, text, date);   //наследуем свойства у Post Es6
+                this.highlighted = highlighted; //  добавляем свое
+            }
+
+            makeTextHighlighted() {                              // добавляем новый метод
+                console.log(`Меняем highlighted c ${this.highlighted}`);
+                this.highlighted = true;
+                console.log(`на ${this.highlighted}`);
+            }
+        }
+
+
+        let objPostEs6 = new PostEs6("Достоевский", "Преступление и наказание", "1865");
+        objPostEs6.edit("Братья Карамазовы");
+        objPostEs6.show();
+
+        let objAttachedPostEs6 = new AttachedPostEs6("Чехов", "Дядя Ваня", "1896");
+        objAttachedPostEs6.edit("Вишнёвый сад");
+        objAttachedPostEs6.show();
+        objAttachedPostEs6.makeTextHighlighted();
+
+
+    </script>
+
+
+
+</body>
+
+</html>
