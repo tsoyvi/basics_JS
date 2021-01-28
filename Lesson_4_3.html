@@ -45,6 +45,8 @@
             },
         ]
 
+        const markingResponses = ["a", "b", "c", "d", "x"];
+
 
         let game = {
             index: 0, // счетчик текущего вопроса
@@ -81,12 +83,27 @@
             },
 
             /**
-             * Функция задает вопрос возвращает ответ пользователя
+             * Функция задает вопрос и возвращает ответ пользователя
              */
             askQuestion() {
                 let str = this.questionSet();
                 str += this.varAnswerSet();
-                return prompt(str);
+
+
+                while (true) {
+
+                    let ask = prompt(str);
+                    if (ask == null) {
+                        return "x";
+                    }
+
+                    if (!markingResponses.includes(ask.toLowerCase())) {
+                        alert("Не верный формат ввода. Введите: " + markingResponses);
+                        continue;
+                    }
+                    return ask;
+                }
+
             },
 
             /**
